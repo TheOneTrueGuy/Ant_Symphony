@@ -22,18 +22,23 @@ Options:
     --max_amp FLOAT        Maximum amplitude 0-1 (default: 0.5)
     --duration FLOAT       Duration in seconds (default: 30)
     --moves_per_second FLOAT  How fast the ants move (default: 10)
+    --output STR           Output filename (default: ant_symphony_YYYYMMDD_HHMMSS.wav)
 
 Example:
     python ant_symphony.py --num_ants 5 --rule RLR --min_freq 100 --max_freq 3000 --duration 30
 
 Output:
-    Generates 'ant_symphony.wav' in the current directory.
+    Generates WAV file with specified name or timestamp-based name if not specified.
+
+Required installation:
+    pip install numpy
 """
 
 import argparse
 import numpy as np
 import wave
 from collections import defaultdict
+from datetime import datetime
 
 class SoundAnt:
     def __init__(self, grid_size, rule):
@@ -126,6 +131,7 @@ def main():
     parser.add_argument('--max_amp', type=float, default=0.5, help='Maximum amplitude (0-1)')
     parser.add_argument('--duration', type=float, default=30, help='Duration in seconds')
     parser.add_argument('--moves_per_second', type=float, default=10, help='Ant moves per second')
+    parser.add_argument('--output', type=str, help='Output filename (default: ant_symphony_YYYYMMDD_HHMMSS.wav)')
     args = parser.parse_args()
 
     # Generate audio
@@ -133,8 +139,17 @@ def main():
     print(f"Using {args.num_ants} ants with rule: {args.rule}")
     audio, sample_rate = generate_ant_symphony(args)
 
-    # Save to WAV file
-    output_filename = "ant_symphony.wav"
+    # Generate default filename with timestamp if none provided
+    if args.output is None:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_filename = f"ant_symphony_{timestamp}.wav"
+    else:
+        output_filename = args.output
+        # Add .wav extension if not present
+        if not output_filename.lower().endswith('.wav'):
+            output_filename += '.wav'
+
+    # Save the audio to WAV file
     with wave.open(output_filename, 'w') as wav_file:
         wav_file.setparams((1, 2, sample_rate, len(audio), "NONE", "not compressed"))
         audio_16bit = np.int16(audio * 32767)
