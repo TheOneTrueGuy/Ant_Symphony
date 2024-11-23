@@ -1,3 +1,35 @@
+"""
+Langton's Ant Symphony Generator
+
+This script generates music by simulating multiple Langton's ants moving on a grid where:
+- X-axis represents frequency (logarithmically scaled)
+- Y-axis represents amplitude (linearly scaled)
+
+Each ant follows a specified rule (e.g., 'RL', 'RLR', 'LLRR') and contributes a tone based on its position.
+The ants interact on a shared grid, affecting each other's movements and creating emergent musical patterns.
+
+Usage:
+    python ant_symphony.py [options]
+
+Options:
+    --num_ants INT          Number of ants (default: 3)
+    --rule STR             Movement rule for ants (default: 'RL')
+                          'R' = turn right, 'L' = turn left
+                          e.g., 'RL', 'RLR', 'LLRR'
+    --min_freq FLOAT       Minimum frequency in Hz (default: 200)
+    --max_freq FLOAT       Maximum frequency in Hz (default: 2000)
+    --min_amp FLOAT        Minimum amplitude 0-1 (default: 0.1)
+    --max_amp FLOAT        Maximum amplitude 0-1 (default: 0.5)
+    --duration FLOAT       Duration in seconds (default: 30)
+    --moves_per_second FLOAT  How fast the ants move (default: 10)
+
+Example:
+    python ant_symphony.py --num_ants 5 --rule RLR --min_freq 100 --max_freq 3000 --duration 30
+
+Output:
+    Generates 'ant_symphony.wav' in the current directory.
+"""
+
 import argparse
 import numpy as np
 import wave
