@@ -60,10 +60,63 @@ Technical Notes
 - Stereo panning is implemented using linear interpolation
 - Frequency and amplitude use logarithmic scaling for more natural progression
 
+Multi-Dimensional Audio Processing
+--------------------------------
+1. Z-Axis Implementation:
+   - Add reverb depth control through Z-axis position
+   - Implement delay feedback based on Z-coordinate
+   - Create spatial audio effects using 3D positioning
+   - Consider using OpenAL for true 3D audio processing
+
+2. Additional Audio Dimensions:
+   - Waveform Envelope Dimension:
+     * ADSR envelope parameters mapped to ant movement
+     * Dynamic envelope shaping based on ant patterns
+     * Real-time envelope modulation
+   
+   - MIDI Sequence Dimension:
+     * Map ant movements to MIDI note sequences
+     * Generate melodic patterns based on ant paths
+     * Create rhythmic variations from ant interactions
+   
+   - Effects Processing Dimension:
+     * Map ant positions to effect parameters
+     * Create dynamic effect chains
+     * Implement real-time effect modulation
+
+3. Performance Considerations:
+   - Evaluate real-time 3D rendering options:
+     * OpenGL for hardware-accelerated visualization
+     * Vulkan for modern GPU utilization
+     * WebGL for browser-based visualization
+   - Consider hybrid 2D/3D approach:
+     * Keep 2D visualization for performance
+     * Use 3D audio processing for spatial effects
+     * Implement layered visualization system
+
+4. Future Dimensional Extensions:
+   - Time Dimension:
+     * Implement time-based effects
+     * Create temporal patterns
+     * Add time-stretching capabilities
+   
+   - Spectral Dimension:
+     * Add spectral processing
+     * Implement frequency-domain effects
+     * Create spectral morphing capabilities
+   
+   - Modulation Dimension:
+     * Add LFO and modulation capabilities
+     * Implement complex modulation routing
+     * Create dynamic modulation patterns
+
 Next Steps
 ----------
 1. Implement basic musical scale mapping
 2. Add waveform selection per ant
 3. Improve audio buffering for smoother playback
 4. Add basic effects processing
-5. Create a configuration system for saving/loading settings 
+5. Create a configuration system for saving/loading settings
+6. Research and prototype 3D audio processing options
+7. Evaluate real-time rendering solutions for multi-dimensional visualization
+8. Design modular system for adding new audio dimensions 
